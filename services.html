@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Lelomolarona Events</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A55A;
+            --dark-purple: #4A1942;
+            --light-bg: #FDF8F3;
+            --white: #FFFFFF;
+            --text-dark: #2C2C2C;
+            --earth-brown: #8B7355;
+            --nature-green: #556B2F;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(74, 25, 66, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, #6B2D5C 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 165, 90, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            top: 20%;
+            left: 10%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201, 165, 90, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+            bottom: 10%;
+            right: 15%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .page-header-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--dark-purple);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gold);
+            margin: 1rem auto;
+        }
+
+        /* Services Overview */
+        .services-overview {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+        }
+
+        .services-overview p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Main Services Section */
+        .services-main {
+            background: var(--dark-purple);
+            color: var(--white);
+        }
+
+        .services-main .section-title {
+            color: var(--gold);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(201, 165, 90, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .service-card h3 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(201, 165, 90, 0.2);
+            font-size: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Service Detail Sections */
+        .service-detail {
+            margin-bottom: 5rem;
+        }
+
+        .service-detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .service-detail-text h3 {
+            font-size: 2rem;
+            color: var(--dark-purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-detail-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-highlight {
+            background: var(--dark-purple);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(74, 25, 66, 0.2);
+        }
+
+        .service-highlight h4 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-highlight ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .service-highlight li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(201, 165, 90, 0.2);
+            font-size: 1.1rem;
+        }
+
+        .service-highlight li:last-child {
+            border-bottom: none;
+        }
+
+        .service-highlight li::before {
+            content: '✦';
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        /* Target Clients Section */
+        .target-clients {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, #6B2D5C 100%);
+            color: var(--white);
+        }
+
+        .target-clients .section-title {
+            color: var(--gold);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .client-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--gold);
+            transition: all 0.3s;
+        }
+
+        .client-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(201, 165, 90, 0.2);
+        }
+
+        .client-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .client-card h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .client-card p {
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: var(--gold);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--dark-purple);
+            color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--gold);
+        }
+
+        .process-step h4 {
+            color: var(--dark-purple);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--light-bg);
+            text-align: center;
+            padding: 6rem 5%;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: var(--dark-purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gold);
+            color: var(--dark-purple);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 165, 90, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #2C1428;
+            color: var(--white);
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: var(--dark-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(201, 165, 90, 0.5);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .service-detail-content {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 5%;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">LELOMOLARONA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>Our Services</h1>
+            <p>Comprehensive, innovative, and high-impact tourism and event solutions</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="services-overview">
+            <h2 class="section-title">What We Offer</h2>
+            <p>Lelomolarona Events provides a fusion of enriching experiences across tourism and events sectors. Our service portfolio spans accommodation, travel and transport, and event management—each thoughtfully crafted to provide value, quality, and memorable experiences while contributing meaningfully to local economic development.</p>
+        </div>
+    </section>
+
+    <section class="section services-main">
+        <h2 class="section-title">Our Core Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📢</div>
+                <h3>Event Advertising & Stalls</h3>
+                <p>Strategic event advertising and stall placement solutions designed to maximize brand visibility and stakeholder engagement.</p>
+                <ul class="service-features">
+                    <li>Targeted advertising campaigns</li>
+                    <li>Strategic stall placement</li>
+                    <li>Brand visibility enhancement</li>
+                    <li>Stakeholder engagement strategies</li>
+                    <li>Commercial value optimization</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Accommodation Services</h3>
+                <p>Comfortable temporary housing with exceptional client service, transitioning to permanent NHBRC-standard facilities.</p>
+                <ul class="service-features">
+                    <li>Temporary housing structures</li>
+                    <li>Exceptional client service</li>
+                    <li>Guest satisfaction focus</li>
+                    <li>NHBRC-standard transition plan</li>
+                    <li>Enhanced comfort facilities</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>Domestic Travel Experiences</h3>
+                <p>Curated travel packages showcasing hidden gems of Northern Cape with comprehensive service inclusions.</p>
+                <ul class="service-features">
+                    <li>Transport and accommodation</li>
+                    <li>Custom tour itineraries</li>
+                    <li>Meals and refreshments</li>
+                    <li>Professional photography</li>
+                    <li>Bush retreats and lake excursions</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="service-detail">
+            <div class="service-detail-content">
+                <div class="service-detail-text">
+                    <h3>Event Advertising & Stalls Package</h3>
+                    <p>We specialize in crafting impactful events through our comprehensive Event Advertising & Stalls Package, designed to help businesses and organizations maximize their presence and engagement at events.</p>
+                    <p>Our approach combines strategic planning with creative execution to ensure your brand stands out and connects meaningfully with your target audience. We handle everything from conceptualization to implementation.</p>
+                    <p>Whether you're participating in a trade show, community festival, or corporate gathering, our solutions are tailored to meet your specific objectives and budget requirements.</p>
+                </div>
+                <div class="service-highlight">
+                    <h4>Who We Serve</h4>
+                    <ul>
+                        <li>Corporates seeking brand exposure</li>
+                        <li>SMMEs looking to expand their reach</li>
+                        <li>NPOs/NPCs promoting their causes</li>
+                        <li>Business chambers and forums</li>
+                        <li>Community organizations</li>
+                        <li>Government entities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-detail">
+            <div class="service-detail-content">
+                <div class="service-highlight">
+                    <h4>Accommodation Features</h4>
+                    <ul>
+                        <li>Currently operated through temporary structures</li>
+                        <li>Focus on exceptional client service</li>
+                        <li>Guest satisfaction priority</li>
+                        <li>Clean, comfortable facilities</li>
+                        <li>Strategic location in Mapoteng, Sishen</li>
+                        <li>Future NHBRC-standard permanent facilities</li>
+                    </ul>
+                </div>
+                <div class="service-detail-text">
+                    <h3>Accommodation Services</h3>
+                    <p>Our accommodation services provide comfortable temporary housing solutions with a focus on exceptional client service and guest satisfaction. While we currently operate through temporary structures, our long-term vision includes transitioning to NHBRC-standard permanent facilities.</p>
+                    <p>We understand that comfortable accommodation is the foundation of any memorable travel experience. That's why we prioritize cleanliness, comfort, and attentive service in all our accommodation offerings.</p>
+                    <p>Located in the heart of Mapoteng, Sishen, our accommodation puts you in the perfect position to explore the unique attractions of the Northern Cape region.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-detail">
+            <div class="service-detail-content">
+                <div class="service-detail-text">
+                    <h3>Domestic Travel Experiences</h3>
+                    <p>Recently launched to serve the festive domestic tourism market, our travel packages offer comprehensive experiences that showcase the hidden gems of Northern Cape—often overlooked in broader travel circuits.</p>
+                    <p>We create niche tourism products within our locality, offering authentic experiences that connect travelers with the natural beauty, culture, and communities of our region.</p>
+                    <p>From bush retreats to lake excursions, each package is carefully curated to provide a memorable and enriching journey through the unique landscapes of Northern Cape.</p>
+                </div>
+                <div class="service-highlight">
+                    <h4>Package Inclusions</h4>
+                    <ul>
+                        <li>Transportation arrangements</li>
+                        <li>Accommodation bookings</li>
+                        <li>Custom tour itineraries</li>
+                        <li>Meals and refreshments</li>
+                        <li>Professional photography sessions</li>
+                        <li>Bush retreat experiences</li>
+                        <li>Lake excursions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section target-clients">
+        <h2 class="section-title">Our Target Clients</h2>
+        <div class="clients-grid">
+            <div class="client-card">
+                <div class="client-icon">🏢</div>
+                <h3>Corporates</h3>
+                <p>Businesses seeking strategic event presence, team building experiences, and corporate travel solutions.</p>
+            </div>
+            <div class="client-card">
+                <div class="client-icon">💼</div>
+                <h3>SMMEs</h3>
+                <p>Small and medium enterprises looking to maximize their marketing impact through events and business travel.</p>
+            </div>
+            <div class="client-card">
+                <div class="client-icon">🤝</div>
+                <h3>NPOs/NPCs</h3>
+                <p>Non-profit organizations requiring event solutions that amplify their message and engage stakeholders.</p>
+            </div>
+            <div class="client-card">
+                <div class="client-icon">🏛️</div>
+                <h3>Business Chambers</h3>
+                <p>Business forums and chambers seeking event management and member engagement solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Our Service Process</h2>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h4>Consultation</h4>
+                <p>We begin with a detailed consultation to understand your needs, objectives, and vision for your event or travel experience.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h4>Planning</h4>
+                <p>Our team develops a comprehensive plan tailored to your specific requirements, budget, and timeline.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h4>Execution</h4>
+                <p>We handle all aspects of implementation with precision and attention to detail, ensuring a seamless experience.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h4>Follow-up</h4>
+                <p>After service delivery, we conduct follow-up to ensure satisfaction and gather feedback for continuous improvement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Transform Your Tourism or Event Experience?</h2>
+        <p>Contact us today to discuss how our community-rooted services can meet your specific needs and create memorable experiences.</p>
+        <a href="contact.html" class="cta-button">Get In Touch</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Lelomolarona Events</h3>
+                <p>Community-rooted tourism and events enterprise based in Mapoteng, Sishen, Northern Cape.</p>
+                <div class="social-links">
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="LinkedIn">💼</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p>📍 Stand No. 4292, Mapoteng, Sishen, 8447</p>
+                <p>📞 066 219 8546</p>
+                <p>✉️ matthomolaresidence@gmail.com</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Our Services</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <a href="#event-advertising">Event Advertising & Stalls</a>
+                <a href="#accommodation">Accommodation Services</a>
+                <a href="#travel">Domestic Travel Experiences</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Lelomolarona Events. All Rights Reserved. | Community-Rooted Tourism & Events</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .client-card, .process-step, .service-detail-content').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

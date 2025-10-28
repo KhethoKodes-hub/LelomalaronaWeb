@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Lelomolarona Events</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A55A;
+            --dark-purple: #4A1942;
+            --light-bg: #FDF8F3;
+            --white: #FFFFFF;
+            --text-dark: #2C2C2C;
+            --earth-brown: #8B7355;
+            --nature-green: #556B2F;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(74, 25, 66, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 60vh;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, #6B2D5C 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 165, 90, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            top: 20%;
+            left: 10%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201, 165, 90, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+            bottom: 10%;
+            right: 15%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .page-header-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--dark-purple);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gold);
+            margin: 1rem auto;
+        }
+
+        /* Our Story Section */
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .story-text h3 {
+            font-size: 2rem;
+            color: var(--dark-purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-highlight {
+            background: var(--dark-purple);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(74, 25, 66, 0.2);
+        }
+
+        .story-highlight h4 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-highlight ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .story-highlight li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(201, 165, 90, 0.2);
+            font-size: 1.1rem;
+        }
+
+        .story-highlight li:last-child {
+            border-bottom: none;
+        }
+
+        .story-highlight li::before {
+            content: '✦';
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        /* Values Section */
+        .values {
+            background: var(--dark-purple);
+            color: var(--white);
+        }
+
+        .values .section-title {
+            color: var(--gold);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+            text-align: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(201, 165, 90, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .value-card h3 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(74, 25, 66, 0.2);
+        }
+
+        .team-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--dark-purple), var(--gold));
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .team-member h3 {
+            color: var(--dark-purple);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member .role {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .team-member p {
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Vision Mission Section */
+        .vision-mission {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, #6B2D5C 100%);
+            color: var(--white);
+        }
+
+        .vision-mission .section-title {
+            color: var(--gold);
+        }
+
+        .vm-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .vm-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+            text-align: center;
+        }
+
+        .vm-card h3 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .vm-card p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Community Impact */
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--dark-purple);
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--light-bg);
+            text-align: center;
+            padding: 6rem 5%;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: var(--dark-purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gold);
+            color: var(--dark-purple);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 165, 90, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #2C1428;
+            color: var(--white);
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: var(--dark-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(201, 165, 90, 0.5);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .story-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">LELOMOLARONA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>About Lelomolarona Events</h1>
+            <p>Community-Rooted Tourism & Events in the Heart of Northern Cape</p>
+        </div>
+    </section>
+
+    <section class="section" id="our-story">
+        <h2 class="section-title">Our Story</h2>
+        <div class="story-content">
+            <div class="story-text">
+                <h3>Transforming Tourism in Northern Cape</h3>
+                <p>Lelomolarona (Pty) Ltd t/a Lelomolarona Events is a dynamic, community-rooted tourism enterprise based in Mapoteng, Sishen, within the Gamagara Municipality of the Northern Cape. Officially registered in 2022, we commenced operations in January 2023 with a clear and purposeful vision.</p>
+                <p>Our journey began with a simple yet powerful idea: to create enriching experiences that not only elevate tourism but also contribute meaningfully to local economic development. We recognized the untapped potential of our region and set out to showcase its hidden gems to the world.</p>
+                <p>From our humble beginnings, we've grown into a multifaceted enterprise offering a fusion of tourism and event services, each thoughtfully crafted to provide value, quality, and memorable experiences for our clients while empowering our local community.</p>
+            </div>
+            <div class="story-highlight">
+                <h4>Our Journey</h4>
+                <ul>
+                    <li>Founded in 2022 with a vision for community tourism</li>
+                    <li>Officially launched operations in January 2023</li>
+                    <li>Based in Mapoteng, Sishen, Northern Cape</li>
+                    <li>Community-rooted approach to tourism development</li>
+                    <li>Focus on sustainable and inclusive growth</li>
+                    <li>Committed to showcasing Northern Cape's hidden treasures</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section values">
+        <h2 class="section-title">Our Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3>Community First</h3>
+                <p>We are deeply rooted in our community and committed to its development. Our success is measured by the positive impact we create locally.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">💡</div>
+                <h3>Innovation</h3>
+                <p>We constantly seek creative solutions and new approaches to transform underutilized destinations into vibrant experiences.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Inclusivity</h3>
+                <p>We believe in creating opportunities for all, ensuring that economic participation extends across our diverse community.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⭐</div>
+                <h3>Excellence</h3>
+                <p>We are committed to delivering high-quality services and memorable experiences that exceed our clients' expectations.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌍</div>
+                <h3>Sustainability</h3>
+                <p>We champion sustainable practices that preserve our natural environment while promoting responsible tourism development.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">💛</div>
+                <h3>Client Focus</h3>
+                <p>Our clients' success is our success. We tailor our services to meet their diverse aspirations and needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="our-founder">
+        <h2 class="section-title">Our Founder</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-avatar">👑</div>
+                <h3>Thabang Macdonald Ntshie</h3>
+                <p class="role">Founder & Visionary Leader</p>
+                <p>Thabang Macdonald Ntshie is the visionary founder and sole shareholder of Lelomolarona (Pty) Ltd. A passionate community developer and events innovator, he brings a wealth of insight, adaptability, and commitment to the tourism industry.</p>
+                <p>His belief that "our clients' success is our success" drives the business's customer-centric approach. Thabang's multifaceted role encompasses business strategy, client relations, and creative direction.</p>
+            </div>
+        </div>
+        <div class="story-content" style="margin-top: 3rem;">
+            <div class="story-highlight">
+                <h4>Leadership Philosophy</h4>
+                <ul>
+                    <li>Visionary Leadership with Community Focus</li>
+                    <li>Hands-On Approach to Business Operations</li>
+                    <li>Resourceful and Resilient Problem-Solving</li>
+                    <li>Strong Work Ethic and Entrepreneurial Drive</li>
+                    <li>Strategic Thinking with Creative Vision</li>
+                    <li>Commitment to Building Trust and Reputation</li>
+                </ul>
+            </div>
+            <div class="story-text">
+                <h3>Hands-On Leadership</h3>
+                <p>Thabang is deeply involved in all aspects of operations, from designing event packages and sourcing local partners to managing bookings, resolving client queries, and ensuring quality standards are met consistently across services.</p>
+                <p>His leadership has been instrumental in establishing Lelomolarona Events as a trusted service provider despite infrastructural limitations. He leverages limited resources with creativity and resilience, renting temporary accommodation structures and mobilising grassroots marketing channels to maintain a consistent presence in the market.</p>
+                <p>His willingness to work at every level of the business reflects a strong work ethic and a hands-on entrepreneurial spirit that inspires our entire team.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section vision-mission">
+        <h2 class="section-title">Our Vision & Mission</h2>
+        <div class="vm-container">
+            <div class="vm-card">
+                <h3>Our Vision</h3>
+                <p>To become a leading, community-rooted tourism brand in South Africa, known for transforming underutilised destinations into vibrant experiences while championing sustainable growth and inclusive economic participation across all service areas.</p>
+            </div>
+            <div class="vm-card">
+                <h3>Our Mission</h3>
+                <p>To provide inclusive, client-focused tourism, eventing, and travel services that uplift communities, empower local economies, and deliver memorable experiences through innovation, commitment, and service excellence across the Northern Cape.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="community-impact">
+        <h2 class="section-title">Community Impact</h2>
+        <div class="story-content">
+            <div class="story-text">
+                <h3>Empowering Local Communities</h3>
+                <p>At Lelomolarona Events, we believe that tourism should be a force for good. Our community-rooted approach ensures that the benefits of tourism extend beyond our clients to the local economy and residents.</p>
+                <p>We actively partner with local suppliers, hire from within our community, and develop tourism products that showcase authentic Northern Cape experiences. Our domestic travel packages are specifically designed to highlight hidden gems often overlooked in broader travel circuits.</p>
+                <p>Through our events and tourism services, we create platforms for local entrepreneurs, artists, and service providers to showcase their talents and grow their businesses.</p>
+            </div>
+            <div class="story-highlight">
+                <h4>Our Impact Areas</h4>
+                <ul>
+                    <li>Job creation and skills development</li>
+                    <li>Support for local SMMEs and suppliers</li>
+                    <li>Promotion of Northern Cape tourism</li>
+                    <li>Cultural preservation and celebration</li>
+                    <li>Economic empowerment initiatives</li>
+                    <li>Sustainable tourism development</li>
+                </ul>
+            </div>
+        </div>
+        <div class="impact-stats">
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Community-Rooted</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2022</div>
+                <div class="stat-label">Year Established</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Service Areas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">Northern Cape</div>
+                <div class="stat-label">Our Home & Focus</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Experience Community-Rooted Tourism?</h2>
+        <p>Join us in discovering the hidden gems of Northern Cape while supporting local community development.</p>
+        <a href="contact.html" class="cta-button">Get In Touch</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Lelomolarona Events</h3>
+                <p>Community-rooted tourism and events enterprise based in Mapoteng, Sishen, Northern Cape.</p>
+                <div class="social-links">
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="LinkedIn">💼</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p>📍 Stand No. 4292, Mapoteng, Sishen, 8447</p>
+                <p>📞 066 219 8546</p>
+                <p>✉️ matthomolaresidence@gmail.com</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Our Services</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Lelomolarona Events. All Rights Reserved. | Community-Rooted Tourism & Events</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.value-card, .team-member, .vm-card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
