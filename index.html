@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lelomolarona Events - Community-Rooted Tourism & Events</title>
+    <title>Lelomolarona Events · Community‑Rooted Tourism</title>
     <link rel="icon" href="assets/LelomolaronaLogo.png" type="image/x-icon">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -20,81 +24,135 @@
             --text-dark: #2C2C2C;
             --earth-brown: #8B7355;
             --nature-green: #556B2F;
+            
+            /* new blue spectrum */
+            --deep-blue: #0B2F5C;
+            --ocean-blue: #1E4A7A;
+            --sky-blue: #6FA3D9;
+            --light-cyan: #D4E9FF;
+            --ice-white: #F0F8FF;
         }
 
         body {
             font-family: 'Georgia', serif;
             color: var(--text-dark);
             overflow-x: hidden;
-            background: var(--light-bg);
+            background: linear-gradient(145deg, var(--ice-white) 0%, #ffffff 45%, #e4f0fa 100%);
         }
 
-        /* Navigation */
+        /* ----- glassmorphism core ----- */
+        .glass {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 32px;
+            box-shadow: 0 15px 35px rgba(0, 20, 50, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px) saturate(200%);
+            -webkit-backdrop-filter: blur(16px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 28px;
+            box-shadow: 0 20px 40px -10px rgba(11, 47, 92, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(201, 165, 90, 0.5);
+            box-shadow: 0 30px 50px -15px var(--deep-blue);
+        }
+
+        .glass-dark {
+            background: linear-gradient(145deg, rgba(11, 47, 92, 0.25), rgba(30, 74, 122, 0.3));
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-right: 1px solid rgba(201, 165, 90, 0.2);
+            border-bottom: 1px solid rgba(201, 165, 90, 0.2);
+        }
+
+        /* Navigation with blue-white glass */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(74, 25, 66, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 5%;
+            background: linear-gradient(90deg, rgba(11, 47, 92, 0.8), rgba(30, 74, 122, 0.7), rgba(111, 163, 217, 0.5));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 1rem 0;
             z-index: 1000;
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0,40,80,0.15);
         }
 
         nav.scrolled {
-            padding: 1rem 5%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 0.5rem 0;
+            background: linear-gradient(90deg, rgba(11, 47, 92, 0.9), rgba(30, 74, 122, 0.85), rgba(111, 163, 217, 0.7));
+            backdrop-filter: blur(18px);
+            box-shadow: 0 12px 35px rgba(0,20,60,0.25);
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
+        .logo img {
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--gold);
-            letter-spacing: 2px;
+        .logo img:hover {
+            transform: scale(1.05) rotate(3deg);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
+        .navbar-nav .nav-link {
+            color: var(--white) !important;
             font-size: 1rem;
-            transition: color 0.3s;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem !important;
             position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 5px rgba(0,20,30,0.3);
         }
 
-        .nav-links a::after {
+        .navbar-nav .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
             background: var(--gold);
-            transition: width 0.3s;
+            transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .navbar-nav .nav-link:hover {
+            color: var(--gold) !important;
+            transform: translateY(-2px);
         }
 
-        /* Hero Section */
+        .navbar-nav .nav-link:hover::after {
+            width: 70%;
+        }
+
+        .navbar-toggler {
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(201, 165, 90, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Hero – layered blue/white gradients + glass orbs */
         .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, var(--dark-purple) 0%, #6B2D5C 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234A1942"/><path d="M0,50 Q50,30 100,50 L100,100 L0,100 Z" fill="%238B7355" opacity="0.3"/></svg>');
-            background-size: cover;
+            min-height: 100vh;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(111, 163, 217, 0.5) 0%, transparent 35%),
+                radial-gradient(circle at 90% 70%, rgba(212, 233, 255, 0.7) 0%, transparent 40%),
+                linear-gradient(125deg, #0B2F5C 0%, #1E4A7A 35%, #6FA3D9 70%, #D4E9FF 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -105,535 +163,366 @@
         .hero::before {
             content: '';
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background:url('./assets/hero.png'),radial-gradient(circle, rgba(201, 165, 90, 0.1) 0%, transparent 70%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 65%);
             border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-            top: 20%;
-            left: 10%;
+            top: -200px;
+            right: -150px;
+            animation: float 12s ease-in-out infinite;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(201, 165, 90, 0.08) 0%, transparent 70%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201,165,90,0.2) 0%, transparent 70%);
             border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-            bottom: 10%;
-            right: 15%;
+            bottom: -100px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite reverse;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+            50% { transform: translateY(-40px) translateX(25px) scale(1.05); }
         }
 
         .hero-content {
             text-align: center;
             color: var(--white);
-            z-index: 1;
-            max-width: 900px;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-            color: var(--gold);
-            letter-spacing: 3px;
+            z-index: 2;
+            padding: 2.5rem;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 70px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 35px 70px -10px rgba(0, 20, 40, 0.3);
             animation: fadeInUp 1s ease;
         }
 
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-shadow: 2px 4px 15px rgba(0,0,0,0.3);
+        }
+
         .hero .tagline {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-style: italic;
-            animation: fadeInUp 1.2s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-            animation: fadeInUp 1.4s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            text-shadow: 1px 2px 10px rgba(0,0,0,0.3);
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--gold);
-            color: var(--dark-purple);
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8934a 100%);
+            color: var(--deep-blue);
             text-decoration: none;
-            font-size: 1.1rem;
             font-weight: bold;
-            border-radius: 50px;
-            transition: all 0.3s;
-            animation: fadeInUp 1.6s ease;
+            border-radius: 60px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0,30,70,0.3);
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(5px);
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(201, 165, 90, 0.4);
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 25px 45px rgba(201,165,90,0.5);
+            background: linear-gradient(135deg, #e5b85c, var(--gold));
         }
 
-        /* About Section */
+        /* About section – light blue/white glass */
         .about {
-            padding: 8rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 5rem 0;
+            background: linear-gradient(120deg, #ffffff 0%, var(--light-cyan) 70%, #c3dffc 100%);
         }
 
         .section-title {
-            font-size: 3rem;
-            color: var(--dark-purple);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--deep-blue);
             text-align: center;
             margin-bottom: 1rem;
-            position: relative;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(255,255,255,0.8);
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 100px;
+            width: 120px;
             height: 4px;
-            background: var(--gold);
+            background: linear-gradient(90deg, var(--gold), var(--sky-blue));
             margin: 1rem auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-top: 4rem;
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            color: var(--dark-purple);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
+            border-radius: 4px;
         }
 
         .highlight-box {
-            background: var(--dark-purple);
-            color: var(--white);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(74, 25, 66, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 40px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px -5px rgba(11,47,92,0.2);
+            transition: all 0.4s ease;
+            color: var(--deep-blue);
+        }
+
+        .highlight-box:hover {
+            background: rgba(255,255,255,0.4);
+            box-shadow: 0 35px 60px -10px var(--deep-blue);
         }
 
         .highlight-box h4 {
-            color: var(--gold);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .highlight-box ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .highlight-box li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(201, 165, 90, 0.2);
-            font-size: 1.1rem;
-        }
-
-        .highlight-box li:last-child {
-            border-bottom: none;
+            color: var(--deep-blue);
+            font-size: 1.6rem;
         }
 
         .highlight-box li::before {
             content: '✦';
             color: var(--gold);
-            font-size: 1.2rem;
             margin-right: 1rem;
         }
 
-        /* Services Section */
+        /* Services – blue gradient with glass cards */
         .services {
-            background: var(--dark-purple);
-            padding: 8rem 5%;
-            color: var(--white);
-        }
-
-        .services .section-title {
-            color: var(--gold);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 4rem auto 0;
+            background: linear-gradient(145deg, #0B2F5C, #1E4A7A, #2b5f96);
+            padding: 5rem 0;
+            color: white;
         }
 
         .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 2px solid var(--gold);
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 40px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            height: 100%;
+            color: white;
+            box-shadow: 0 25px 40px -10px rgba(0,0,0,0.3);
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(201, 165, 90, 0.3);
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255,255,255,0.18);
+            border-color: var(--gold);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 40px 60px -5px #00000050;
         }
 
         .service-icon {
             font-size: 3rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+            filter: drop-shadow(0 5px 10px rgba(201,165,90,0.4));
         }
 
-        .service-card h3 {
-            color: var(--gold);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        /* Owner Section */
+        /* Owner section – white/blue fresh glass */
         .owner {
-            padding: 8rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-            background: var(--light-bg);
-        }
-
-        .owner-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-top: 4rem;
-        }
-
-        .owner-text h3 {
-            font-size: 2rem;
-            color: var(--dark-purple);
-            margin-bottom: 1.5rem;
-        }
-
-        .owner-text p {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
+            padding: 5rem 0;
+            background: linear-gradient(145deg, #E2F0FF, #ffffff, #c2dcf5);
         }
 
         .owner-highlight {
-            background: var(--dark-purple);
-            color: var(--white);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(74, 25, 66, 0.2);
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(18px);
+            border-radius: 40px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 20px 40px -10px var(--deep-blue);
         }
 
-        .owner-highlight h4 {
-            color: var(--gold);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .owner-highlight ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .owner-highlight li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(201, 165, 90, 0.2);
-            font-size: 1.1rem;
-        }
-
-        .owner-highlight li:last-child {
-            border-bottom: none;
-        }
-
-        .owner-highlight li::before {
-            content: '✦';
-            color: var(--gold);
-            font-size: 1.2rem;
-            margin-right: 1rem;
-        }
-
-        /* Vision & Mission Section */
+        /* Vision mission – layered blue gradient with glass cards */
         .vision-mission {
-            background: linear-gradient(135deg, var(--dark-purple) 0%, #6B2D5C 100%);
-            padding: 8rem 5%;
-            color: var(--white);
-        }
-
-        .vision-mission .section-title {
-            color: var(--gold);
-        }
-
-        .vm-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 4rem auto 0;
+            background: linear-gradient(145deg, #0B2F5C, #1E4A7A, #1B4B77);
+            padding: 5rem 0;
         }
 
         .vm-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 2px solid var(--gold);
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 40px;
+            padding: 2.5rem;
             text-align: center;
+            color: white;
         }
 
-        .vm-card h3 {
-            color: var(--gold);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+        .vm-card:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: var(--gold);
         }
 
-        .vm-card p {
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        /* Contact Section */
+        /* Contact – blue-white gradient, glass items */
         .contact {
-            background: var(--light-bg);
-            padding: 8rem 5%;
-            color: var(--text-dark);
-        }
-
-        .contact .section-title {
-            color: var(--dark-purple);
-        }
-
-        .contact-content {
-            max-width: 1000px;
-            margin: 4rem auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            background: linear-gradient(145deg, #F0F8FF, #ffffff, #D4E9FF);
+            padding: 5rem 0;
         }
 
         .contact-item {
             display: flex;
             align-items: start;
             gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.8rem;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(18px);
+            border-radius: 35px;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 15px 30px -10px rgba(11,47,92,0.15);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(12px);
+            border-color: var(--gold);
         }
 
         .contact-icon {
             font-size: 2rem;
-            color: var(--gold);
-            min-width: 40px;
-        }
-
-        .contact-item h4 {
-            color: var(--dark-purple);
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .contact-item p {
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .contact-item a {
-            color: var(--dark-purple);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: var(--gold);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: var(--gold);
-            color: var(--dark-purple);
+            background: rgba(11,47,92,0.2);
+            backdrop-filter: blur(5px);
+            width: 65px;
+            height: 65px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .social-links a {
+            width: 55px;
+            height: 55px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid white;
+            color: var(--deep-blue);
+            border-radius: 30px;
+            font-size: 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
         }
 
         .social-links a:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 20px rgba(201, 165, 90, 0.5);
+            background: var(--gold);
+            color: var(--deep-blue);
+            transform: scale(1.2) rotate(5deg);
+            border-color: var(--deep-blue);
         }
 
         .contact-form {
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--dark-purple);
-            font-size: 1.1rem;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(22px);
+            padding: 2.5rem;
+            border-radius: 45px;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 25px 40px -15px #0B2F5C30;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--gold);
-            background: var(--light-bg);
-            border-radius: 10px;
-            color: var(--text-dark);
-            font-size: 1rem;
-            font-family: 'Georgia', serif;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 25px;
+            padding: 1rem 1.5rem;
         }
 
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(44, 44, 44, 0.6);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            background: rgba(255,255,255,0.8);
+            border-color: var(--gold);
+            box-shadow: 0 5px 20px rgba(201,165,90,0.3);
         }
 
         .submit-button {
             width: 100%;
             padding: 1.2rem;
-            background: var(--gold);
-            color: var(--dark-purple);
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--deep-blue), var(--ocean-blue));
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 60px;
             font-weight: bold;
-            cursor: pointer;
+            backdrop-filter: blur(10px);
             transition: all 0.3s;
         }
 
         .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(201, 165, 90, 0.4);
+            background: linear-gradient(135deg, #1E4A7A, #0B2F5C);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--deep-blue);
+            border-color: var(--gold);
         }
 
-        /* Footer */
         footer {
-            background: #2C1428;
-            color: var(--white);
+            background: linear-gradient(145deg, #0B2F5C, #0A274A);
+            color: white;
+            padding: 2.5rem;
             text-align: center;
-            padding: 2rem 5%;
+            border-top: 1px solid rgba(255,255,255,0.2);
         }
 
-        footer p {
-            font-size: 1rem;
-            opacity: 0.8;
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.4rem;
-            }
-
-            .about-content,
-            .owner-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2.2rem;
+        @media (max-width: 768px) {
+            .navbar-collapse {
+                background: rgba(11,47,92,0.8);
+                backdrop-filter: blur(20px);
+                border-radius: 30px;
+                padding: 1.5rem;
+                margin-top: 1rem;
             }
-
-            .hero .tagline {
-                font-size: 1.2rem;
-            }
-
-            .nav-links {
-                display: none;
+            .hero-content {
+                margin: 0 1rem;
+                padding: 2rem 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav id="navbar">
-        <div class="nav-container">
-            <div class="logo"><a><img src="assets/LelomolaronaLogo.png" height="80" width="80"></a></div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <!--<li><a href="#owner">Our Founder</a></li>-->
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+    <nav class="navbar navbar-expand-lg" id="navbar">
+        <div class="container">
+            <a class="navbar-brand logo" href="#home">
+                <img src="assets/LelomolaronaLogo.png" height="70" width="70" alt="Lelomolarona Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <section class="hero" id="home">
-        <div class="hero-content">
+        <div class="hero-content container">
             <h1>LELOMOLARONA EVENTS</h1>
             <p class="tagline">Community-Rooted Tourism & Events</p>
             <p>A dynamic tourism enterprise based in Mapoteng, Sishen, Northern Cape. We deliver comprehensive, innovative, and high-impact services across tourism and events sectors, transforming underutilized destinations into vibrant experiences.</p>
@@ -642,225 +531,261 @@
     </section>
 
     <section class="about" id="about">
-        <h2 class="section-title">About Us</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Transforming Tourism in Northern Cape</h3>
-                <p>Lelomolarona (Pty) Ltd t/a Lelomolarona Events is a dynamic, community-rooted tourism enterprise based in Mapoteng, Sishen, within the Gamagara Municipality of the Northern Cape. Officially registered in 2022, we commenced operations in January 2023 with a clear and purposeful vision.</p>
-                <p>Our enterprise offers a fusion of enriching experiences that not only elevate tourism but also contribute meaningfully to local economic development. We are committed to inclusive, client-focused solutions tailored to meet the diverse aspirations of our clients.</p>
-                <p>Our service portfolio spans the accommodation, travel and transport, and event management sub-sectors—each thoughtfully crafted to provide value, quality, and memorable experiences.</p>
-            </div>
-            <div class="highlight-box">
-                <h4>Our Commitment</h4>
-                <ul>
-                    <li>Community-rooted tourism development</li>
-                    <li>Innovative and high-impact services</li>
-                    <li>Inclusive and client-focused solutions</li>
-                    <li>Local economic empowerment</li>
-                    <li>Sustainable growth practices</li>
-                    <li>Memorable and authentic experiences</li>
-                </ul>
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="row mt-5 align-items-center">
+                <div class="col-lg-6 fade-in">
+                    <div class="about-text">
+                        <h3 style="color: var(--deep-blue);">Transforming Tourism in Northern Cape</h3>
+                        <p>Lelomolarona (Pty) Ltd t/a Lelomolarona Events is a dynamic, community-rooted tourism enterprise based in Mapoteng, Sishen, within the Gamagara Municipality of the Northern Cape. Officially registered in 2022, we commenced operations in January 2023 with a clear and purposeful vision.</p>
+                        <p>Our enterprise offers a fusion of enriching experiences that not only elevate tourism but also contribute meaningfully to local economic development. We are committed to inclusive, client-focused solutions tailored to meet the diverse aspirations of our clients.</p>
+                        <p>Our service portfolio spans the accommodation, travel and transport, and event management sub-sectors—each thoughtfully crafted to provide value, quality, and memorable experiences.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in">
+                    <div class="highlight-box">
+                        <h4>Our Commitment</h4>
+                        <ul>
+                            <li>Community-rooted tourism development</li>
+                            <li>Innovative and high-impact services</li>
+                            <li>Inclusive and client-focused solutions</li>
+                            <li>Local economic empowerment</li>
+                            <li>Sustainable growth practices</li>
+                            <li>Memorable and authentic experiences</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="services" id="services">
-        <h2 class="section-title">Our Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">📢</div>
-                <h3>Event Advertising & Stalls</h3>
-                <p>Strategic event advertising and stall placement solutions for corporates, SMMEs, NPOs/NPCs, and business chambers to promote brand visibility and enhance stakeholder engagement.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🏠</div>
-                <h3>Accommodation</h3>
-                <p>Currently operated through temporary housing structures with exceptional client service. Our long-term goal is transitioning to NHBRC-standard permanent facilities for enhanced comfort.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🚗</div>
-                <h3>Domestic Travel Experiences</h3>
-                <p>Recently launched packages including transport, accommodation, tour itineraries, meals, professional photography, bush retreats, and lake excursions showcasing hidden gems of Northern Cape.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🤝</div>
-                <h3>Community Events</h3>
-                <p>Creating impactful community events that bring people together, celebrate local culture, and foster economic participation across all service areas.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">💼</div>
-                <h3>Corporate Partnerships</h3>
-                <p>Strategic partnerships with businesses to create meaningful corporate events, team-building activities, and stakeholder engagement opportunities.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🌍</div>
-                <h3>Local Tourism Development</h3>
-                <p>Developing niche tourism products within our locality—often overlooked in broader travel circuits—to showcase the unique beauty of Northern Cape.</p>
+        <div class="container">
+            <h2 class="section-title" style="color: var(--gold);">Our Services</h2>
+            <div class="row mt-5 g-4">
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="service-card">
+                        <div class="service-icon">📢</div>
+                        <h3>Event Advertising & Stalls</h3>
+                        <p>Strategic event advertising and stall placement solutions for corporates, SMMEs, NPOs/NPCs, and business chambers to promote brand visibility.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="service-card">
+                        <div class="service-icon">🏠</div>
+                        <h3>Accommodation</h3>
+                        <p>Currently operated through temporary housing structures with exceptional client service. Transitioning to NHBRC-standard permanent facilities.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="service-card">
+                        <div class="service-icon">🚗</div>
+                        <h3>Domestic Travel Experiences</h3>
+                        <p>Packages include transport, accommodation, tour itineraries, meals, photography, bush retreats, and lake excursions in Northern Cape.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="service-card">
+                        <div class="service-icon">🤝</div>
+                        <h3>Community Events</h3>
+                        <p>Creating impactful community events that bring people together, celebrate local culture, and foster economic participation.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="service-card">
+                        <div class="service-icon">💼</div>
+                        <h3>Corporate Partnerships</h3>
+                        <p>Strategic partnerships with businesses to create meaningful corporate events, team-building activities, and stakeholder engagement.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="service-card">
+                        <div class="service-icon">🌍</div>
+                        <h3>Local Tourism Development</h3>
+                        <p>Developing niche tourism products within our locality to showcase the unique beauty of Northern Cape.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="owner" id="owner">
-        <h2 class="section-title">Our Founder</h2>
-        <div class="owner-content">
-            <div class="owner-text">
-                <h3>Thabang Macdonald Ntshie</h3>
-                <p>Thabang Macdonald Ntshie is the visionary founder and sole shareholder (100%) of Lelomolarona (Pty) Ltd. A passionate community developer and events innovator, Mr. Ntshie brings a wealth of insight, adaptability, and commitment to the tourism industry.</p>
-                <p>His belief that "our clients' success is our success" drives the business's customer-centric approach. Thabang's multifaceted role encompasses business strategy, client relations, and creative direction—ensuring the enterprise not only serves but empowers its clientele and community.</p>
-                <p>He is deeply involved in all aspects of operations, from designing event packages and sourcing local partners to managing bookings, resolving client queries, and ensuring quality standards are met consistently across services.</p>
-            </div>
-            <div class="owner-highlight">
-                <h4>Leadership Qualities</h4>
-                <ul>
-                    <li>Visionary Leadership</li>
-                    <li>Community-Centered & Client-Focused</li>
-                    <li>Versatile and Hands-On</li>
-                    <li>Resourceful and Resilient</li>
-                    <li>Strong Work Ethic & Entrepreneurial Drive</li>
-                    <li>Strategic Thinker with Creative Vision</li>
-                    <li>Trust Builder and Reputation Steward</li>
-                </ul>
+        <div class="container">
+            <h2 class="section-title">Our Founder</h2>
+            <div class="row mt-5 align-items-center">
+                <div class="col-lg-6 fade-in">
+                    <div class="owner-text">
+                        <h3 style="color: var(--deep-blue);">Thabang Macdonald Ntshie</h3>
+                        <p>Thabang Macdonald Ntshie is the visionary founder and sole shareholder (100%) of Lelomolarona (Pty) Ltd. A passionate community developer and events innovator, Mr. Ntshie brings a wealth of insight, adaptability, and commitment to the tourism industry.</p>
+                        <p>His belief that "our clients' success is our success" drives the business's customer-centric approach. Thabang's multifaceted role encompasses business strategy, client relations, and creative direction.</p>
+                        <p>He is deeply involved in all aspects of operations, from designing event packages and sourcing local partners to managing bookings and ensuring quality standards.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in">
+                    <div class="owner-highlight">
+                        <h4>Leadership Qualities</h4>
+                        <ul>
+                            <li>Visionary Leadership</li>
+                            <li>Community-Centered & Client-Focused</li>
+                            <li>Versatile and Hands-On</li>
+                            <li>Resourceful and Resilient</li>
+                            <li>Strong Work Ethic & Entrepreneurial Drive</li>
+                            <li>Strategic Thinker with Creative Vision</li>
+                            <li>Trust Builder and Reputation Steward</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="vision-mission">
-        <h2 class="section-title">Our Vision & Mission</h2>
-        <div class="vm-container">
-            <div class="vm-card">
-                <h3>Our Vision</h3>
-                <p>To become a leading, community-rooted tourism brand in South Africa, known for transforming underutilised destinations into vibrant experiences while championing sustainable growth and inclusive economic participation across all service areas.</p>
-            </div>
-            <div class="vm-card">
-                <h3>Our Mission</h3>
-                <p>To provide inclusive, client-focused tourism, eventing, and travel services that uplift communities, empower local economies, and deliver memorable experiences through innovation, commitment, and service excellence across the Northern Cape.</p>
+        <div class="container">
+            <h2 class="section-title" style="color: var(--gold);">Our Vision & Mission</h2>
+            <div class="row mt-5 g-4">
+                <div class="col-lg-6 fade-in">
+                    <div class="vm-card">
+                        <h3>Our Vision</h3>
+                        <p>To become a leading, community-rooted tourism brand in South Africa, known for transforming underutilised destinations into vibrant experiences while championing sustainable growth and inclusive economic participation.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in">
+                    <div class="vm-card">
+                        <h3>Our Mission</h3>
+                        <p>To provide inclusive, client-focused tourism, eventing, and travel services that uplift communities, empower local economies, and deliver memorable experiences through innovation, commitment, and service excellence across the Northern Cape.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <h4>Location</h4>
-                        <p>Stand No. 4292, Mapoteng, Sishen, 8447<br>Gamagara Municipality, Northern Cape</p>
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row mt-5">
+                <div class="col-lg-6 mb-4">
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Stand No. 4292, Mapoteng, Sishen, 8447<br>Gamagara Municipality, Northern Cape</p>
+                        </div>
                     </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div>
-                        <h4>Phone</h4>
-                        <p><a href="tel:0662198546">066 219 8546</a></p>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p><a href="tel:0662198546" style="color: var(--deep-blue);">066 219 8546</a></p>
+                        </div>
                     </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div>
-                        <h4>Email</h4>
-                        <p><a href="mailto:matthomolaresidence@gmail.com">matthomolaresidence@gmail.com</a></p>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:matthomolaresidence@gmail.com" style="color: var(--deep-blue);">matthomolaresidence@gmail.com</a></p>
+                        </div>
                     </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🌟</div>
-                    <div>
-                        <h4>Follow Us</h4>
-                        <div class="social-links">
-                            <a href="#" title="Instagram">📷</a>
-                            <a href="#" title="Facebook">📘</a>
-                            <a href="#" title="Twitter">🐦</a>
-                            <a href="#" title="LinkedIn">💼</a>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">🌟</div>
+                        <div>
+                            <h4>Follow Us</h4>
+                            <div class="social-links">
+                                <a href="#" title="Instagram">📷</a>
+                                <a href="#" title="Facebook">📘</a>
+                                <a href="#" title="Twitter">🐦</a>
+                                <a href="#" title="LinkedIn">💼</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="contact-form">
-                <form>
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" placeholder="Enter your name" required>
+                <div class="col-lg-6 fade-in">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service Interest</label>
+                                <select id="service" required>
+                                    <option value="">Select a service</option>
+                                    <option value="event-advertising">Event Advertising & Stalls</option>
+                                    <option value="accommodation">Accommodation</option>
+                                    <option value="travel-experiences">Domestic Travel Experiences</option>
+                                    <option value="community-events">Community Events</option>
+                                    <option value="corporate-partnerships">Corporate Partnerships</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Tell Us About Your Needs</label>
+                                <textarea id="message" placeholder="Share your requirements with us..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-button">Send Inquiry</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service Interest</label>
-                        <select id="service" required>
-                            <option value="">Select a service</option>
-                            <option value="event-advertising">Event Advertising & Stalls</option>
-                            <option value="accommodation">Accommodation</option>
-                            <option value="travel-experiences">Domestic Travel Experiences</option>
-                            <option value="community-events">Community Events</option>
-                            <option value="corporate-partnerships">Corporate Partnerships</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Tell Us About Your Needs</label>
-                        <textarea id="message" placeholder="Share your requirements with us..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Send Inquiry</button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Lelomolarona Events. All Rights Reserved. | Community-Rooted Tourism & Events</p>
+        <div class="container">
+            <p>&copy; 2025 Lelomolarona Events. All Rights Reserved. | Community-Rooted Tourism & Events</p>
+        </div>
     </footer>
 
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        // Smooth scrolling
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const navHeight = document.getElementById('navbar').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    const navCollapse = document.getElementById('navbarNav');
+                    if (navCollapse.classList.contains('show')) {
+                        bootstrap.Collapse.getInstance(navCollapse).hide();
+                    }
                 }
             });
         });
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            if (window.pageYOffset > 100) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
 
-        // Form submission
-        document.querySelector('form').addEventListener('submit', (e) => {
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Thank you for your inquiry! We will contact you shortly to discuss your needs.');
+            alert('Thank you for your inquiry! We will contact you shortly.');
             e.target.reset();
         });
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.service-card, .vm-card, .owner-text, .about-text').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // subtle parallax for fun
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.services, .vision-mission').forEach(el => {
+                el.style.backgroundPositionY = `${scrolled * 0.2}px`;
+            });
         });
     </script>
 </body>
