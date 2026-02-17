@@ -171,20 +171,22 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Page Header – blue gradient with glass orbs */
+        /* Page Header – blue gradient with glass orbs and background image */
         .page-header {
             height: 60vh;
             min-height: 500px;
             background: 
                 radial-gradient(circle at 10% 20%, rgba(111, 163, 217, 0.5) 0%, transparent 35%),
                 radial-gradient(circle at 90% 70%, rgba(212, 233, 255, 0.7) 0%, transparent 40%),
-                linear-gradient(125deg, #0B2F5C 0%, #1E4A7A 35%, #6FA3D9 70%, #D4E9FF 100%);
+                linear-gradient(125deg, rgba(11, 47, 92, 0.88) 0%, rgba(30, 74, 122, 0.85) 35%, rgba(111, 163, 217, 0.75) 70%, rgba(212, 233, 255, 0.7) 100%),
+                url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1920&q=80') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
             margin-top: 70px;
+            background-attachment: fixed;
         }
 
         .page-header::before {
@@ -231,6 +233,17 @@
             animation: fadeInUp 1s ease;
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .page-header h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1.5rem;
@@ -275,7 +288,13 @@
             border-radius: 4px;
         }
 
-        /* Our Story Section – glass elements */
+        /* Our Story Section – glass elements with background */
+        #our-story {
+            background: 
+                linear-gradient(120deg, rgba(255, 255, 255, 0.92) 0%, rgba(212, 233, 255, 0.88) 70%, rgba(195, 223, 252, 0.92) 100%),
+                url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1920&q=80') center/cover fixed;
+        }
+
         .story-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -331,9 +350,11 @@
             margin-right: 1rem;
         }
 
-        /* Values Section – blue gradient background + glass cards */
+        /* Values Section – blue gradient background + glass cards with image */
         .values {
-            background: linear-gradient(145deg, #0B2F5C, #1E4A7A, #2b5f96);
+            background: 
+                linear-gradient(145deg, rgba(11, 47, 92, 0.93), rgba(30, 74, 122, 0.91), rgba(43, 95, 150, 0.9)),
+                url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80') center/cover fixed;
             color: white;
             position: relative;
         }
@@ -384,7 +405,13 @@
             margin-bottom: 1rem;
         }
 
-        /* Team Section – glassmorphism cards */
+        /* Team Section – glassmorphism cards with background */
+        #our-founder {
+            background: 
+                linear-gradient(145deg, rgba(226, 240, 255, 0.95), rgba(255, 255, 255, 0.92), rgba(194, 220, 245, 0.94)),
+                url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80') center/cover fixed;
+        }
+
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -439,9 +466,11 @@
             font-weight: 600;
         }
 
-        /* Vision Mission Section – blue gradient + glass */
+        /* Vision Mission Section – blue gradient + glass with inspiring background */
         .vision-mission {
-            background: linear-gradient(145deg, #0B2F5C, #1E4A7A, #1B4B77);
+            background: 
+                linear-gradient(145deg, rgba(11, 47, 92, 0.92), rgba(30, 74, 122, 0.9), rgba(27, 75, 119, 0.91)),
+                url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80') center/cover fixed;
             color: white;
             position: relative;
         }
@@ -482,7 +511,13 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Community Impact – glass stats */
+        /* Community Impact – glass stats with community background */
+        #community-impact {
+            background: 
+                linear-gradient(145deg, rgba(240, 248, 255, 0.95), rgba(255, 255, 255, 0.93), rgba(212, 233, 255, 0.94)),
+                url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80') center/cover fixed;
+        }
+
         .impact-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -521,9 +556,11 @@
             font-weight: 500;
         }
 
-        /* CTA Section – glass with light gradient */
+        /* CTA Section – glass with light gradient and background */
         .cta-section {
-            background: linear-gradient(145deg, #F0F8FF, #ffffff, #D4E9FF);
+            background: 
+                linear-gradient(145deg, rgba(240, 248, 255, 0.96), rgba(255, 255, 255, 0.94), rgba(212, 233, 255, 0.95)),
+                url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1920&q=80') center/cover fixed;
             text-align: center;
             padding: clamp(4rem, 8vw, 6rem) 5%;
             position: relative;
@@ -683,6 +720,11 @@
             .page-header { height: 50vh; margin-top: 60px; }
             .story-content { grid-template-columns: 1fr; }
             .impact-stats { grid-template-columns: repeat(2, 1fr); }
+            
+            /* Disable parallax on mobile for better performance */
+            .page-header, #our-story, .values, #our-founder, .vision-mission, #community-impact, .cta-section {
+                background-attachment: scroll !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -697,7 +739,8 @@
     
     <nav id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><img src="assets/LelomolaronaLogo.png" alt="Lelomolarona Events Logo"></a>
+            <a href="index.html" class="logo"><img src="assets/lelomoLogo.jpeg" height="70" width="70" alt="Lelomolarona Logo">
+</a>
             <button class="mobile-toggle" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
             </button>

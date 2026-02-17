@@ -162,20 +162,22 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Page Header – blue gradient with glass orbs */
+        /* Page Header – blue gradient with glass orbs and background image */
         .page-header {
             height: 50vh;
             min-height: 400px;
             background: 
                 radial-gradient(circle at 20% 20%, rgba(111, 163, 217, 0.5) 0%, transparent 40%),
                 radial-gradient(circle at 80% 80%, rgba(212, 233, 255, 0.7) 0%, transparent 45%),
-                linear-gradient(125deg, #0B2F5C 0%, #1E4A7A 40%, #6FA3D9 75%, #D4E9FF 100%);
+                linear-gradient(125deg, rgba(11, 47, 92, 0.88) 0%, rgba(30, 74, 122, 0.85) 40%, rgba(111, 163, 217, 0.78) 75%, rgba(212, 233, 255, 0.7) 100%),
+                url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=80') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
             margin-top: 70px;
+            background-attachment: fixed;
         }
 
         .page-header::before {
@@ -222,6 +224,17 @@
             animation: fadeInUp 1s ease;
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .page-header h1 {
             font-size: clamp(2.2rem, 4.5vw, 3.5rem);
             margin-bottom: 1rem;
@@ -243,6 +256,9 @@
             padding: clamp(4rem, 8vw, 6rem) 5%;
             max-width: 1400px;
             margin: 0 auto;
+            background: 
+                linear-gradient(145deg, rgba(240, 248, 255, 0.95), rgba(255, 255, 255, 0.93), rgba(212, 233, 255, 0.94)),
+                url('https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=1920&q=80') center/cover fixed;
         }
 
         .section-title {
@@ -446,9 +462,11 @@
             border-color: var(--gold);
         }
 
-        /* Map Section – glass + blue gradient */
+        /* Map Section – glass + blue gradient with background */
         .map-section {
-            background: linear-gradient(145deg, #0B2F5C, #1E4A7A, #1B4B77);
+            background: 
+                linear-gradient(145deg, rgba(11, 47, 92, 0.92), rgba(30, 74, 122, 0.9), rgba(27, 75, 119, 0.91)),
+                url('https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=1920&q=80') center/cover fixed;
             color: var(--white);
             padding: clamp(4rem, 8vw, 6rem) 5%;
             position: relative;
@@ -553,9 +571,12 @@
             box-shadow: 0 12px 30px rgba(201,165,90,0.4);
         }
 
-        /* FAQ Section – glass items */
+        /* FAQ Section – glass items with background */
         .faq-section {
-            background: transparent;
+            background: 
+                linear-gradient(145deg, rgba(240, 248, 255, 0.96), rgba(255, 255, 255, 0.94), rgba(212, 233, 255, 0.95)),
+                url('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1920&q=80') center/cover fixed;
+            padding: clamp(4rem, 8vw, 6rem) 5%;
         }
 
         .faq-container {
@@ -618,9 +639,11 @@
             color: var(--deep-blue);
         }
 
-        /* CTA Section – glass on gradient */
+        /* CTA Section – glass on gradient with background */
         .cta-section {
-            background: linear-gradient(145deg, #0B2F5C, #1E4A7A, #0F3A5F);
+            background: 
+                linear-gradient(145deg, rgba(11, 47, 92, 0.93), rgba(30, 74, 122, 0.91), rgba(15, 58, 95, 0.92)),
+                url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&q=80') center/cover fixed;
             color: var(--white);
             text-align: center;
             padding: clamp(4rem, 8vw, 6rem) 5%;
@@ -790,6 +813,11 @@
             .contact-content, .map-container { grid-template-columns: 1fr; }
             .map-info { margin-bottom: 2rem; }
             .cta-buttons { flex-direction: column; align-items: center; }
+            
+            /* Disable parallax on mobile for better performance */
+            .page-header, .section, .map-section, .faq-section, .cta-section {
+                background-attachment: scroll !important;
+            }
         }
     </style>
 </head>
@@ -798,7 +826,7 @@
     
     <nav id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><img src="assets/LelomolaronaLogo.png" alt="Lelomolarona Events Logo"></a>
+            <a href="index.html" class="logo"><img src="assets/lelomoLogo.jpeg" height="70" width="70" alt="Lelomolarona Logo"></a>
             <button class="mobile-toggle" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
@@ -932,7 +960,7 @@
             </div>
         </section>
 
-        <section class="section faq-section">
+        <section class="faq-section">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
                 <div class="faq-item fade-in">
